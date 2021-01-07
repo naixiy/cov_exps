@@ -94,9 +94,21 @@
     sort_area_shape: "square"
   };
 
+  var trial_6 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/A01.png','images/N03.png','images/A03.png','images/A04.png'],
+    prompt: '<p>And one where someone is wearing a mask...</p>',
+    change_border_background_color: false,
+    border_width: 3,
+    counter_text_unfinished: "",
+    counter_text_finished: "",
+    stim_starts_inside: true,
+    sort_area_shape: "square"
+  };
+
   jsPsych.init({
     //timeline: [trial_1, trial_2, trial_3, trial_4, trial_5],
-    timeline: [trial_5],
+    timeline: [trial_5, trial_6],
     on_finish: function(){jsPsych.data.displayData();}
   });
 
