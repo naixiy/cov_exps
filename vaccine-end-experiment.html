@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="jspsych.js"></script>
+  <script src="pluginmods/jspsych-image-keyboard-response-mda.js"></script>
+  <link rel="stylesheet" href="css/jspsych.css">
+  <style>
+    img {
+      width: 300px;
+    }
+  </style>
+</head>
+<body></body>
+<script>
+  var images = ["images/health_0.png", "images/health_1.png", "images/health_2.png", "images/health_3.png", "images/health_4.png", "images/health_5.png", "images/health_6.png", "images/health_7.png", "images/health_8.png"];
+
+  var trials = [];
+  var trial_nums = [];
+  for (var i = 0; i < images.length; i++) {
+    trials.push({
+      stimulus: images[i],
+      trial_numbers: i
+    });
+  }
+
+  var trial_num = 2;
+  for (var t = 0; t < 5; t++) {
+  var block = {
+    type: 'image-keyboard-response-mda',
+    choices: [84, 78], // Y or N
+    //trial_num: function(){return trial_num},
+    //block_i: block_num,
+    prompt: '<p>Press <b>N</b> to do nothing and carry on with your day.<br><br>Press <b>T</b> if you would like to book at COVID-19 test.</p>',
+    on_finish: function(data) {
+      console.log(data.key_press);
+      if (data.key_press == 84) {
+        jsPsych.endExperiment('You booked a COVID-19 test.');
+      }
+    },
+    timeline: trials
+  }
+}
+
+  jsPsych.init({
+    timeline: [block]
+  });
+
+</script>
+
+</html>
