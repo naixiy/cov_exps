@@ -221,7 +221,36 @@ jsPsych.plugins['free-sort-mda'] = (function() {
 
     let inside = []
     //for (let i = 0; i < trial.stimuli.length; i++) {
-    for (let i = 0; i < 2; i++) {
+
+
+    // Mark note: so from here I've pulled out the first stim, fixed its position, and stopped it being dragged.
+    // centring starting postion
+    var x_start = (trial.sort_area_width - trial.stim_width)/2;
+    var y_start = (trial.sort_area_height - trial.stim_height)/2;
+
+    display_element.querySelector("#jspsych-free-sort-arena").innerHTML += '<img '+
+      'src="'+trial.stimuli[0]+'" '+
+      'data-src="'+trial.stimuli[0]+'" '+
+      //'class="jspsych-free-sort-draggable" '+
+      //'draggable="false" '+
+      'id="jspsych-free-sort-draggable-'+0+'" '+
+      'style="position: absolute; cursor: move; width:'+trial.stim_width+'px; height:'+trial.stim_height+'px; top:'+y_start+'px; left:'+x_start+'px;">'+
+      '</img>';
+
+    init_locations.push({
+      "src": trial.stimuli[0],
+      "x": x_start,
+      "y": y_start
+    });
+    if (trial.stim_starts_inside) {
+      inside.push(true);
+    } else {
+      inside.push(false);
+    }
+
+    // Mark note: end
+
+    for (let i = 1; i < 2; i++) {
       var coords;
       if (trial.stim_starts_inside) {
         coords = random_coordinate(trial.sort_area_width - trial.stim_width, trial.sort_area_height - trial.stim_height);
