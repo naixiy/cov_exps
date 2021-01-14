@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych.js"></script>
+    <script src="plugins/jspsych-image-button-response.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <link rel="stylesheet" href="css/jspsych.css">
+  </head>
+  <body></body>
+  <script>
+
+  var timeline = [];
+
+  // If render_on_canvas is false, the images will be shown via an <images> rather than <canvas> element.
+  // In some browsers, the first time the images are shown, the <images> method (render_on_canvas: false) will produce a brief
+  // blank screen (white flash) between images that are presented consecutively with no post_trial_gap between them.
+  /*var trial = {
+    type: 'image-button-response',
+    stimulus: jsPsych.timelineVariable('stim'),
+    trial_duration: 1000,
+    choices: ['Happy', 'Sad'],
+    prompt: '<p>What emotion is this person showing?</p><p>(1s duration, consecutive images with no post_trial_gap)</p>',
+    stimulus_width: 400,
+    maintain_aspect_ratio: true,
+    post_trial_gap: 0,
+    //render_on_canvas: false
+  }*/
+
+  /*timeline.push({
+    timeline: [trial],
+    timeline_variables: [
+      {stim: 'images/happy_face_1.jpg'},
+      {stim: 'images/happy_face_2.jpg'},
+      {stim: 'images/happy_face_3.jpg'},
+      {stim: 'images/happy_face_4.jpg'}
+    ]
+  });*/
+
+  /*timeline.push({
+    type: 'image-button-response',
+    stimulus: 'images/happy_face_1.jpg',
+    choices: ['Happy', 'Sad'],
+    prompt: "<p>What emotion is this person showing?</p><p>(Wait for response)</p>",
+    post_trial_gap: 500
+  });*/
+
+  var test_prompt = "<p>If you would book a COVID-19 test with these symptoms, please press the button.<br><br>If you would <b>not</b> book a COVID-19 test with these symptoms, please wait.</p>";
+  var symptom_duration = 2000;
+
+  //var timeline = [];
+
+  var day_0 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_0.png',
+    //stimulus_height: 400,
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    //stimulus_duration: 5000,
+    prompt: test_prompt,
+    //post_trial_gap: 500
+  };
+  //timeline.push(day_0);
+
+  var day_1 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_1.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_1 = {
+    timeline: [day_1],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_2 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_2.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_2 = {
+    timeline: [day_2],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_3 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_3.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_3 = {
+    timeline: [day_3],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_4 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_4.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_4 = {
+    timeline: [day_4],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_5 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_5.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_5 = {
+    timeline: [day_5],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_6 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_6.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_6 = {
+    timeline: [day_6],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_7 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_7.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_7 = {
+    timeline: [day_7],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_8 = {
+    type: 'image-button-response',
+    stimulus: 'images/health_8.png',
+    choices: ['Get a test today'],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_8 = {
+    timeline: [day_8],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var you_live ={
+    type: 'html-keyboard-response',
+    stimulus: '<p>You booked a test!<br>You test positive, get prescribed Vitamin D, and everything is going to turn out fine.<br><br>Press any key to end.</p>'
+  }
+
+  var you_die ={
+    type: 'html-keyboard-response',
+    stimulus: '<p>You got too sick to book a test and someone else had to do it for you.<br>Look after yourself better in future.<br><br>Press any key to end.</p>'
+  }
+
+  var conditional_finale_live = {
+    timeline: [you_live],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return true;
+      } else {
+        //console.log('going to next day');
+        return false;
+      }
+    }
+  };
+
+  var conditional_finale_die = {
+    timeline: [you_die],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      console.log(data);
+      //console.log(data.button_pressed);
+      console.log(data.trial_type);
+      return data.trial_type.localeCompare("html-keyboard-response");
+    }
+  };
+
+  jsPsych.init({
+    timeline: [day_0,conditional_day_1,conditional_day_2,conditional_day_3,conditional_day_4,conditional_day_5,conditional_day_6,conditional_day_7,conditional_day_8,conditional_finale_live,conditional_finale_die],
+    preload_images: ['images/health_0.png','images/health_1.png', 'images/health_2.png', 'images/health_3.png', 'images/health_4.png', 'images/health_5.png', 'images/health_6.png', 'images/health_7.png', 'images/health_8.png'],
+    //on_finish: function(){jsPsych.data.displayData();}
+  });
+
+  </script>
+</html>
