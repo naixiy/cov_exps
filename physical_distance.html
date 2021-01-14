@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jspsych.js"></script>
+	<script src="pluginmods/jspsych-resize-mda.js"></script>
+	<script src="plugins/jspsych-image-keyboard-response.js"></script>
+	<link rel="stylesheet" href="css/jspsych.css">
+</head>
+<body>
+</body>
+<script>
+
+	var inputs = {
+		type: 'resize-mda',
+		//item_width: 3 + 3/8,
+		//item_height: 2 + 1/8,
+		stim_1: 'images/lego_mask_blue.png',
+		stim_2: 'images/lego_blue_shorts.png',
+		prompt: "<p>[This is very much a sketch mechanism. Imagine that blue box above is a double ended arrow like you see on the 'Keep 2m distance' signs to stress you shouldn't be standing close to other people. Then imagine I've put character images at either end of the box (e.g. the participant's avatar, with/without a mask, on the left, and another character, who is in/out-group and with/without a mask, on the right.)<br>The participant then gets to resize the box to indicate how far apart they'd stand.]<br><br>\
+		Example instructions: You (left) stop to chat to your friend (right) for a bit.<br><br>How close do you want to stand to them?<br><br>Click and drag the blue square to change the distance. Press continue when you're happy [to END].</p>",
+		pixels_per_unit: 642/4
+	};
+
+	/*var image_display = {
+		type: 'image-keyboard-response',
+		stimulus: 'img/happy_face_4.jpg',
+		prompt: '<p>If scaling worked, then the image above should be 4 inches wide.</p>',
+	}*/
+
+	jsPsych.init({
+		timeline: [inputs],
+		on_finish: function() {
+			jsPsych.data.displayData();
+		}
+	});
+	</script>
+</html>
