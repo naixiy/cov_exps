@@ -44,16 +44,51 @@
     post_trial_gap: 500
   });*/
 
-  var test_prompt = "<p>If you would book a COVID-19 test with these symptoms, please press the button.<br><br>If you would <b>not</b> book a COVID-19 test with these symptoms, please wait.</p>";
-  var symptom_duration = 2000;
+  var intro_0 = {
+    type: 'html-keyboard-response',
+    stimulus: '<p><u>Getting a COVID-19 test</u></p>'+
+              '<p>The NHS asks you to get a test as soon as possible if you develop any of the main symptoms of COVID-19.</p>'+
+              '<p>These main symptoms are:</p>'+
+              '<div style="text-align:left; margin-left: 270px;" ><ul><li><b>a high temperature</b></li><li><b>a new, continuous cough</b></li><li><b>a loss or change to your sense of smell or taste</b></li></ul></div>'+
+              '<p><br>Press any key to continue.</p>'
+  }
+
+  var intro_1 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_normal.png',
+    choices: ['If you felt like this, you would <b>definitely not have <u>any</u></b> of those main symptoms of COVID-19.<br><br>Click this button to continue.'],
+    //prompt: "<p>If you had these symptoms...</p>",
+  };
+
+  var intro_2 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_severe.png',
+    choices: ['However, if you felt like this, you would <b>definitely have <u>all</u></b> of those main symptoms of COVID-19.<br><br>Click this button to continue.'],
+    //prompt: "<p>If you had these symptoms...</p>",
+  };
+
+  var intro_3 = {
+    type: 'html-keyboard-response',
+    stimulus: '<p>We are interested in if and when you would book a COVID-19 test depending on how you are feeling.</p>' +
+              '<p>On the following screen, we will give you some symptoms.<br></p>' +
+              '<p><br><b>You will see a button which you can choose to click if you would book a test with those symptoms.</b></p>' +
+              '<p><br><b>If you <u>would</u> get a test with the symptoms you see</b>, <u>click</u> the button.</p>' +
+              '<p><b>If you would <u>not</u> get a test with the symptoms you see</b>, <u>do not</u> click the button.</p>' +
+              '<p><br>The symptoms you are shown may change. You are free to press the "Book a test" button, or not, at any time.</p>' +
+              '<p><br>Press any key to continue.</p>'
+  }
+
+  var test_prompt = "<p>If you would book a COVID-19 test with these symptoms, please press the 'Book a test now' button.<br><br>If you would <b>not</b> book a COVID-19 test with these symptoms, please wait.</p>";
+  var symptom_duration = 5000;
+  var book_test = "<p>Book a test now</p>"
 
   //var timeline = [];
 
   var day_0 = {
     type: 'image-button-response',
-    stimulus: 'images/health_0.png',
+    stimulus: 'images/symptoms_0.png',
     //stimulus_height: 400,
-    choices: ['Get a test today'],
+    choices: [book_test],
     trial_duration: symptom_duration,
     //stimulus_duration: 5000,
     prompt: test_prompt,
@@ -63,8 +98,8 @@
 
   var day_1 = {
     type: 'image-button-response',
-    stimulus: 'images/health_1.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_1.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -87,8 +122,8 @@
 
   var day_2 = {
     type: 'image-button-response',
-    stimulus: 'images/health_2.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_2.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -111,8 +146,8 @@
 
   var day_3 = {
     type: 'image-button-response',
-    stimulus: 'images/health_3.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_3.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -135,8 +170,8 @@
 
   var day_4 = {
     type: 'image-button-response',
-    stimulus: 'images/health_4.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_4.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -159,8 +194,8 @@
 
   var day_5 = {
     type: 'image-button-response',
-    stimulus: 'images/health_5.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_5.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -183,8 +218,8 @@
 
   var day_6 = {
     type: 'image-button-response',
-    stimulus: 'images/health_6.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_6.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -207,8 +242,8 @@
 
   var day_7 = {
     type: 'image-button-response',
-    stimulus: 'images/health_7.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_7.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -231,8 +266,8 @@
 
   var day_8 = {
     type: 'image-button-response',
-    stimulus: 'images/health_8.png',
-    choices: ['Get a test today'],
+    stimulus: 'images/symptoms_8.png',
+    choices: [book_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
   };
@@ -253,14 +288,38 @@
     }
   };
 
+  var day_9 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_9.png',
+    choices: [book_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_9 = {
+    timeline: [day_9],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
   var you_live ={
     type: 'html-keyboard-response',
-    stimulus: '<p>You booked a test!<br>You test positive, get prescribed Vitamin D, and everything is going to turn out fine.<br><br>Press any key to end.</p>'
+    stimulus: '<p>You booked a test.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>'
   }
 
   var you_die ={
     type: 'html-keyboard-response',
-    stimulus: '<p>You got too sick to book a test and someone else had to do it for you.<br>Look after yourself better in future.<br><br>Press any key to end.</p>'
+    stimulus: "<p>You did not book a test.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>"
   }
 
   var conditional_finale_live = {
@@ -291,9 +350,9 @@
   };
 
   jsPsych.init({
-    timeline: [day_0,conditional_day_1,conditional_day_2,conditional_day_3,conditional_day_4,conditional_day_5,conditional_day_6,conditional_day_7,conditional_day_8,conditional_finale_live,conditional_finale_die],
-    preload_images: ['images/health_0.png','images/health_1.png', 'images/health_2.png', 'images/health_3.png', 'images/health_4.png', 'images/health_5.png', 'images/health_6.png', 'images/health_7.png', 'images/health_8.png'],
-    //on_finish: function(){jsPsych.data.displayData();}
+    timeline: [intro_0,intro_1,intro_2,intro_3,day_0,conditional_day_1,conditional_day_2,conditional_day_3,conditional_day_4,conditional_day_5,conditional_day_6,conditional_day_7,conditional_day_8,conditional_day_9,conditional_finale_live,conditional_finale_die],
+    preload_images: ['images/symptoms_normal.png','images/symptoms_severe.png','images/symptoms_0.png','images/symptoms_1.png', 'images/symptoms_2.png', 'images/symptoms_3.png', 'images/symptoms_4.png', 'images/symptoms_5.png', 'images/symptoms_6.png', 'images/symptoms_7.png', 'images/symptoms_8.png', 'images/symptoms_9.png'],
+    on_finish: function(){jsPsych.data.displayData();}
   });
 
   </script>
