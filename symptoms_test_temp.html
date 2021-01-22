@@ -89,7 +89,7 @@
 
   var day_0 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_0.png',
+    stimulus: 'images/temp_0.png',
     //stimulus_height: 400,
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
@@ -101,7 +101,7 @@
 
   var day_1 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_1.png',
+    stimulus: 'images/temp_1.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -125,7 +125,7 @@
 
   var day_2 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_2.png',
+    stimulus: 'images/temp_2.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -149,7 +149,7 @@
 
   var day_3 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_3.png',
+    stimulus: 'images/temp_3.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -173,7 +173,7 @@
 
   var day_4 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_4.png',
+    stimulus: 'images/temp_4.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -197,7 +197,7 @@
 
   var day_5 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_5.png',
+    stimulus: 'images/temp_5.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -221,7 +221,7 @@
 
   var day_6 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_6.png',
+    stimulus: 'images/temp_6.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -245,7 +245,7 @@
 
   var day_7 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_7.png',
+    stimulus: 'images/temp_7.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -269,7 +269,7 @@
 
   var day_8 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_8.png',
+    stimulus: 'images/temp_8.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -293,7 +293,7 @@
 
   var day_9 = {
     type: 'image-button-response',
-    stimulus: 'images/symptoms_9.png',
+    stimulus: 'images/temp_9.png',
     choices: [book_test, wait_test],
     trial_duration: symptom_duration,
     prompt: test_prompt
@@ -354,7 +354,7 @@
 
   jsPsych.init({
     timeline: [intro_0,intro_1,intro_2,intro_3,day_0,conditional_day_1,conditional_day_2,conditional_day_3,conditional_day_4,conditional_day_5,conditional_day_6,conditional_day_7,conditional_day_8,conditional_day_9,conditional_finale_live,conditional_finale_die],
-    preload_images: ['images/symptoms_normal.png','images/symptoms_severe.png','images/symptoms_0.png','images/symptoms_1.png', 'images/symptoms_2.png', 'images/symptoms_3.png', 'images/symptoms_4.png', 'images/symptoms_5.png', 'images/symptoms_6.png', 'images/symptoms_7.png', 'images/symptoms_8.png', 'images/symptoms_9.png'],
+    preload_images: ['images/symptoms_normal.png','images/symptoms_severe.png','images/temp_0.png','images/temp_1.png', 'images/temp_2.png', 'images/temp_3.png', 'images/temp_4.png', 'images/temp_5.png', 'images/temp_6.png', 'images/temp_7.png', 'images/temp_8.png', 'images/temp_9.png'],
     on_finish: function(){jsPsych.data.displayData();}
   });
 
