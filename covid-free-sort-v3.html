@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych.js"></script>
+    <script src="pluginmods/jspsych-free-sort-mda.js"></script>
+    <script src="plugins/jspsych-canvas-keyboard-response.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <link rel="stylesheet" href="css/jspsych.css">
+    <style>
+p.solid {border-style: solid;
+  background-color: #FFFFFF;
+  padding: 100;
+  margin: 100;}
+</style>
+  </head>
+  <body></body>
+  <script>
+
+  /* this can be added to style, above
+  body {
+    background-image: url('images/grassl.jpg');
+  }*/
+
+  var timeline = [];
+
+  var instructions_1 = {
+    type: 'html-keyboard-response',
+    stimulus: 'You have an exciting day ahead of you.<br><br>You are going to the park, and then to the pub.<br><br>You are <b>not</b> wearing a mask.<br><br>Press any key to continue.'
+  };
+  //timeline.push(instructions_1);
+
+  var trial_1 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/lego_red.png','images/lego_blue_shorts.png'],//,'images/A03.png','images/A04.png'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in the park when a stranger asks you for directions.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: true,
+    bg_image: "url('images/grass_3.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 60,
+    stim_width: 60,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for the stranger to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+  timeline.push(trial_1);
+
+  jsPsych.init({
+    //timeline: [trial_1, trial_2, trial_3, trial_4, trial_5],
+    timeline: timeline,
+    on_finish: function(){jsPsych.data.displayData();}
+  });
+
+
+  </script>
+</html>
