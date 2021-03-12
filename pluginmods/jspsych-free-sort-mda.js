@@ -136,6 +136,11 @@ jsPsych.plugins['free-sort-mda'] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
+    //document.body.style.backgroundColor = "#ffff00";
+    //document.body.style.backgroundImage = "url('images/grass.jpg')";
+    document.body.style.backgroundImage = trial.bg_image;
+    //console.log(document.body.style.backgroundImage);
+
     var start_time = performance.now();
 
     if (trial.change_border_background_color == false) {
@@ -305,7 +310,7 @@ jsPsych.plugins['free-sort-mda'] = (function() {
         border.style.background = trial.border_color_in;
       }
       button.style.visibility = "visible";
-      display_element.querySelector("#jspsych-free-sort-counter").innerHTML = trial.counter_text_finished;
+      display_element.querySelector("#jspsych-free-sort-counter").innerHTML = "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>"+trial.counter_text_finished+"</p>";
     }
 
     for(let i=0; i<draggables.length; i++){
@@ -343,11 +348,11 @@ jsPsych.plugins['free-sort-mda'] = (function() {
               border.style.background = trial.border_color_in;
             }
             button.style.visibility = "visible";
-            display_element.querySelector("#jspsych-free-sort-counter").innerHTML = trial.counter_text_finished;
+            display_element.querySelector("#jspsych-free-sort-counter").innerHTML = "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>"+trial.counter_text_finished+"</p>";
           } else {
             border.style.background = "none";
             button.style.visibility = "hidden";
-            display_element.querySelector("#jspsych-free-sort-counter").innerHTML = get_counter_text(inside.length - inside.filter(Boolean).length);
+            display_element.querySelector("#jspsych-free-sort-counter").innerHTML = "<p style='border:3px; border-style:solid; border-color: black; background-color: coral; padding: 1em;'>"+get_counter_text(inside.length - inside.filter(Boolean).length)+"</p>";
           }
         }
         document.addEventListener('mousemove', mousemoveevent);
