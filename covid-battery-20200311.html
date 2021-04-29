@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych.js"></script>
+    <script src="pluginmods/jspsych-free-sort-mda.js"></script>
+    <script src="plugins/jspsych-image-button-response.js"></script>
+    <script src="plugins/jspsych-canvas-keyboard-response.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="pluginmods/jspsych-serial-reaction-time-mouse-mda.js"></script>
+    <script src="pluginmods/jspsych-html-button-response-mda.js"></script>
+    <link rel="stylesheet" href="css/jspsych-mda.css">
+    <style>
+p.solid {border-style: solid;
+  background-color: #FFFFFF;
+  padding: 100;
+  margin: 100;}
+</style>
+  </head>
+  <body>
+  </body>
+  <script>
+
+  /* this can be added to style, above
+  body {
+    background-image: url('images/grassl.jpg');
+  }*/
+
+  //https://creazilla.com/nodes/53598-person-standing-emoji-clipart
+
+//var timeline = [];
+
+var grid_rows = 7;
+var grid_cols = 7;
+var square_size = 50;
+
+var grid = [];
+var locations = [];
+
+for(var i=0; i<grid_rows; i++){
+  grid.push([]);
+  for(var j=0; j<grid_cols; j++){
+    grid[i].push(1);
+    if(i>0 && i < grid_rows-1 && j > 0 && j < grid_cols - 1){
+      locations.push([i,j]);
+    }
+  }
+}
+
+var unsel_seat = '<img src = images/untaken_seat3.png width = 50>';
+var taken_seat = '<img src = images/person_light_blue_seat.png width = 50>';
+var you_seat = '<img src = images/person_blue_seat.png width = 50>';
+
+var seat_1a = {
+  type: 'html-button-response-mda',
+  stimulus: '<p>Some text about the context.</p>',
+  selected_seat: [you_seat],
+  choices: [unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,
+  unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,
+  unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,
+unsel_seat,unsel_seat,unsel_seat,taken_seat,unsel_seat,unsel_seat,unsel_seat,
+unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,
+unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,
+unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat,unsel_seat],
+  prompt: "<p>Some more text</p>",
+  prompt_end: "<p>Selection made [2 second pause]</p>"
+};
+
+var seat_1 = {
+  type: 'serial-reaction-time-mouse-mda',
+  grid: grid,
+  grid_square_size: square_size,
+  target: [3,3],
+  target_color: "#FF0000",
+  allow_nontarget_responses: true,
+  response_ends_trial: true,
+}
+
+var seat_placement = [seat_1a,seat_1];
+
+  var instructions_1 = {
+    type: 'html-keyboard-response',
+    stimulus: 'You have an exciting day ahead of you.<br><br>You are going to the park, and then to the pub.<br><br>You are <b>not</b> wearing a mask.<br><br>Press any key to continue.'
+  };
+  //timeline.push(instructions_1);
+
+  var trial_1 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_red_flip.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in the park when a stranger asks you for directions.<br><br>They are not wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: true,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/grass_4.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for the stranger to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+  //timeline.push(trial_1);
+
+  var trial_2 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_red_flip_mask_park.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in the park when a stranger asks you for directions.<br><br>They are wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: true,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/grass_4.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for the stranger to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+
+  var trial_3 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_light_blue.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in the park when you see your friend and stop for a brief chat.<br><br>They are not wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: true,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/grass_4.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for your friend to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+
+  var trial_4 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_light_blue_mask.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in the park when you see your friend and stop for a brief chat.<br><br>They are wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: true,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/grass_4.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for your friend to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+
+  var trial_5 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_red_flip_mask_coffee.png','images/person_blue2_mask.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in a queue at a cafe. The person in front of you is a stranger.<br><br>They are wearing a mask.<br><br>Where would you stand while you wait in the queue?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/cafe_floor.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're outside of the cafe now. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "square"
+  };
+  //timeline.push(trial_1);
+
+  var trial_6 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_light_blue_mask_coffee.png','images/person_blue2_mask.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in a queue at a cafe. The person in front of you is a friend of yours.<br><br>They are wearing a mask.<br><br>Where would you stand while you wait in the queue?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/cafe_floor.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're outside of the cafe now. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "square"
+  };
+
+  var trial_7 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_red_flip_mask.png','images/person_blue2_mask.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You need some repairs done in your home. A tradesperson, who you have not met before, has just arrived to help and is talking to your about the problem.<br><br>They are wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/carpet.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're outside of the room now. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "square"
+  };
+
+  var trial_8 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_light_blue_mask.png','images/person_blue2_mask.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You need some repairs done in your home. A friend has just arrived to help and is talking to your about the problem.<br><br>They are wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/carpet.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're outside of the room now. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "square"
+  };
+
+  var trial_9 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_red_flip.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in your friend's garden and have been introduced to someone you have never met before, who you have never met before.<br><br>They are not wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/lawn2.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for the stranger to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+  //timeline.push(trial_1);
+
+  var trial_10 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_red_flip_mask.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in your friend's garden and have been introduced to someone you have never met before.<br><br>They are wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/lawn2.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for the stranger to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+
+  var trial_11 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_light_blue.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in your friend's garden chatting to your friend.<br><br>They are not wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/lawn2.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for your friend to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+
+  var trial_12 = {
+    type: 'free-sort-mda',
+    stimuli: ['images/person_light_blue_mask.png','images/person_blue2.png'],//,'images/A03.jpg','images/A04.jpg'],
+    prompt: "<p style='border:3px; border-style:solid; border-color: black; background-color: white; padding: 1em;'>You are in your friend's garden chatting to your friend.<br><br>They are wearing a mask.<br><br>How close would you stand to talk to them?</p>",
+    change_border_background_color: false,
+    //bg_image: "url('images/grass_3.jpg')",
+    //bg_image: "url(https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg)",
+    bg_image: "url('images/lawn2.jpg')",
+    border_color_in:  "ffffff",//"#1e8449",
+    border_color_out: "ffffff",//"#196f3d",
+    stim_height: 150,
+    stim_width: 150,
+    border_width: 10,
+    counter_text_unfinished: "<br>You're too far away for your friend to hear you. You'll have to move closer.<br><br>",
+    counter_text_finished: "Click and drag your character to move them to where you would stand.<br><br>Press continue when you're happy with your position.",
+    stim_starts_inside: true,
+    sort_area_shape: "ellipse"
+  };
+
+
+  var distancing_array = [trial_1,trial_2,trial_3,trial_4,trial_5,trial_6,
+                          trial_7,trial_8,trial_9,trial_10,trial_11,trial_11];
+
+  var distancing_array_shuffled = jsPsych.randomization.repeat(distancing_array, 1);
+
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+
+  var intro_0 = {
+    type: 'html-keyboard-response',
+    stimulus: '<p><u>Getting a COVID-19 test</u></p>'+
+              '<p>The NHS asks you to get a test as soon as possible if you develop <u>any</u> of the main symptoms of COVID-19.</p>'+
+              '<p>These main symptoms are:</p>'+
+              '<div style="text-align:left; margin-left: 270px;" ><ul><li><b>a high temperature</b></li><li><b>a new, continuous cough</b></li><li><b>a loss or change to your sense of smell or taste</b></li></ul></div>'+
+              '<p><br>Press any key to continue.</p>'
+  }
+
+  var intro_1 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_normal.jpg',
+    choices: ['If you felt like this, you would <b>definitely not have <u>any</u></b> of those main symptoms of COVID-19.<br><br>Click this button to continue.'],
+    //prompt: "<p>If you had these symptoms...</p>",
+  };
+
+  var intro_2 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_severe.jpg',
+    choices: ['However, if you felt like this, you would <b>definitely have <u>all</u></b> of those main symptoms of COVID-19.<br><br>Click this button to continue.'],
+    //prompt: "<p>If you had these symptoms...</p>",
+  };
+
+  var intro_3 = {
+    type: 'html-keyboard-response',
+    stimulus: '<p>We are interested in if and when you would book a COVID-19 test depending on how you are feeling.</p>' +
+              '<p>On the following screen, we will give you some symptoms.<br></p>' +
+              '<p>Please tell us whether you would <b>Book a test</b> with those symptoms, or if you would <b>Wait and see</b> if your symptoms changed.</p>' +
+              //'<p><br><b>You will see a button which you can choose to click if you would book a test with those symptoms.</b></p>' +
+              //'<p><br><b>If you <u>would</u> get a test with the symptoms you see</b>, <u>click</u> the button.</p>' +
+              //'<p><b>If you would <u>not</u> get a test with the symptoms you see</b>, <u>do not</u> click the button.</p>' +
+              //'<p><br>The symptoms you are shown may change.</p>' +
+              '<p><br>Press any key to continue.</p>'
+  }
+
+  var test_prompt = "<p>If you had these symptoms, please click the 'Book a test now' button if you would get a COVID-19 test.</p>" +
+                    "<p>If you would not (yet) book a test, please click the 'Wait and see' button.</p>";
+  var symptom_duration = 60000;
+  var book_test = "<p>Book a test</p>"
+  var wait_test = "<p>Wait and see</p>"
+
+  //var timeline = [];
+
+//////////////////
+/// temp ///
+/////////////////
+var day_0_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_0.jpg',
+  //stimulus_height: 400,
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  //stimulus_duration: 5000,
+  prompt: test_prompt,
+  //post_trial_gap: 500
+};
+//timeline.push(day_0);
+
+var day_1_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_1.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_1_temp = {
+  timeline: [day_1_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_2_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_2.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_2_temp = {
+  timeline: [day_2_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_3_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_3.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_3_temp = {
+  timeline: [day_3_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_4_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_4.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_4_temp = {
+  timeline: [day_4_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_5_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_5.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_5_temp = {
+  timeline: [day_5_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_6_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_6.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_6_temp = {
+  timeline: [day_6_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_7_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_7.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_7_temp = {
+  timeline: [day_7_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_8_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_8.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_8_temp = {
+  timeline: [day_8_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_9_temp = {
+  type: 'image-button-response',
+  stimulus: 'images/temp_9.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_9_temp = {
+  timeline: [day_9_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var you_live_temp ={
+  type: 'html-keyboard-response',
+  stimulus: '<p>You booked a test.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>'
+}
+
+var you_die_temp ={
+  type: 'html-keyboard-response',
+  stimulus: "<p>You did not book a test with any of the symptoms shown.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>"
+}
+
+var conditional_finale_live_temp = {
+  timeline: [you_live_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return true;
+    } else {
+      //console.log('going to next day');
+      return false;
+    }
+  }
+};
+
+var conditional_finale_die_temp = {
+  timeline: [you_die_temp],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    console.log(data);
+    //console.log(data.button_pressed);
+    console.log(data.trial_type);
+    return data.trial_type.localeCompare("html-keyboard-response");
+  }
+};
+/////////////////
+
+//////////////////////
+/// COUGH ///
+////////////////////
+
+var day_0_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_0.jpg',
+  //stimulus_height: 400,
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  //stimulus_duration: 5000,
+  prompt: test_prompt,
+  //post_trial_gap: 500
+};
+//timeline.push(day_0);
+
+var day_1_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_1.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_1_cough = {
+  timeline: [day_1_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_2_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_2.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_2_cough = {
+  timeline: [day_2_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_3_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_3.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_3_cough = {
+  timeline: [day_3_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_4_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_4.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_4_cough = {
+  timeline: [day_4_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_5_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_5.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_5_cough = {
+  timeline: [day_5_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_6_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_6.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_6_cough = {
+  timeline: [day_6_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_7_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_7.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_7_cough = {
+  timeline: [day_7_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_8_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_8.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_8_cough = {
+  timeline: [day_8_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var day_9_cough = {
+  type: 'image-button-response',
+  stimulus: 'images/coughing_9.jpg',
+  choices: [book_test, wait_test],
+  trial_duration: symptom_duration,
+  prompt: test_prompt
+};
+
+var conditional_day_9_cough = {
+  timeline: [day_9_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return false;
+    } else {
+      //console.log('going to next day');
+      return true;
+    }
+  }
+};
+
+var you_live_cough ={
+  type: 'html-keyboard-response',
+  stimulus: '<p>You booked a test.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>'
+}
+
+var you_die_cough ={
+  type: 'html-keyboard-response',
+  stimulus: "<p>You did not book a test with any of the symptoms shown.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>"
+}
+
+var conditional_finale_live_cough = {
+  timeline: [you_live_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    //console.log(data);
+    //console.log(data.button_pressed);
+    if(data.button_pressed == 0){
+      //console.log('not continuing');
+      return true;
+    } else {
+      //console.log('going to next day');
+      return false;
+    }
+  }
+};
+
+var conditional_finale_die_cough = {
+  timeline: [you_die_cough],
+  conditional_function: function(){
+    var data = jsPsych.data.get().last(1).values()[0];
+    console.log(data);
+    //console.log(data.button_pressed);
+    console.log(data.trial_type);
+    return data.trial_type.localeCompare("html-keyboard-response");
+  }
+};
+
+///////////////////////
+/// ALL SYMPTOMS ///
+////////////////////////
+
+
+  var day_0 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_0.jpg',
+    //stimulus_height: 400,
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    //stimulus_duration: 5000,
+    prompt: test_prompt,
+    //post_trial_gap: 500
+  };
+  //timeline.push(day_0);
+
+  var day_1 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_1.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_1 = {
+    timeline: [day_1],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_2 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_2.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_2 = {
+    timeline: [day_2],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_3 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_3.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_3 = {
+    timeline: [day_3],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_4 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_4.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_4 = {
+    timeline: [day_4],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_5 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_5.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_5 = {
+    timeline: [day_5],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_6 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_6.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_6 = {
+    timeline: [day_6],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_7 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_7.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_7 = {
+    timeline: [day_7],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_8 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_8.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_8 = {
+    timeline: [day_8],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_9 = {
+    type: 'image-button-response',
+    stimulus: 'images/symptoms_9.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_9 = {
+    timeline: [day_9],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var you_live ={
+    type: 'html-keyboard-response',
+    stimulus: '<p>You booked a test.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>'
+  }
+
+  var you_die ={
+    type: 'html-keyboard-response',
+    stimulus: "<p>You did not book a test with any of the symptoms shown.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>"
+  }
+
+  var conditional_finale_live = {
+    timeline: [you_live],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return true;
+      } else {
+        //console.log('going to next day');
+        return false;
+      }
+    }
+  };
+
+  var conditional_finale_die = {
+    timeline: [you_die],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      console.log(data);
+      //console.log(data.button_pressed);
+      console.log(data.trial_type);
+      return data.trial_type.localeCompare("html-keyboard-response");
+    }
+  };
+
+
+  ////////////////
+  /// SMELL ///
+  ////////////////
+  var day_0_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_0.jpg',
+    //stimulus_height: 400,
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    //stimulus_duration: 5000,
+    prompt: test_prompt,
+    //post_trial_gap: 500
+  };
+  //timeline.push(day_0);
+
+  var day_1_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_1.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_1_smell = {
+    timeline: [day_1_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_2_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_2.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_2_smell = {
+    timeline: [day_2_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_3_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_3.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_3_smell = {
+    timeline: [day_3_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_4_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_4.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_4_smell = {
+    timeline: [day_4_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_5_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_5.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_5_smell = {
+    timeline: [day_5_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_6_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_6.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_6_smell = {
+    timeline: [day_6_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_7_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_7.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_7_smell = {
+    timeline: [day_7_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_8_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_8.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_8_smell = {
+    timeline: [day_8_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var day_9_smell = {
+    type: 'image-button-response',
+    stimulus: 'images/smell_9.jpg',
+    choices: [book_test, wait_test],
+    trial_duration: symptom_duration,
+    prompt: test_prompt
+  };
+
+  var conditional_day_9_smell = {
+    timeline: [day_9_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return false;
+      } else {
+        //console.log('going to next day');
+        return true;
+      }
+    }
+  };
+
+  var you_live_smell ={
+    type: 'html-keyboard-response',
+    stimulus: '<p>You booked a test.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>'
+  }
+
+  var you_die_smell ={
+    type: 'html-keyboard-response',
+    stimulus: "<p>You did not book a test with any of the symptoms shown.<br>Thank you, that is the end of this section.<br><br>Press any key to continue.</p>"
+  }
+
+  var conditional_finale_live_smell = {
+    timeline: [you_live_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      //console.log(data);
+      //console.log(data.button_pressed);
+      if(data.button_pressed == 0){
+        //console.log('not continuing');
+        return true;
+      } else {
+        //console.log('going to next day');
+        return false;
+      }
+    }
+  };
+
+  var conditional_finale_die_smell = {
+    timeline: [you_die_smell],
+    conditional_function: function(){
+      var data = jsPsych.data.get().last(1).values()[0];
+      console.log(data);
+      //console.log(data.button_pressed);
+      console.log(data.trial_type);
+      return data.trial_type.localeCompare("html-keyboard-response");
+    }
+  };
+
+  var symptoms_timeline = [intro_0,intro_1,intro_2,intro_3,
+    day_0_temp,conditional_day_1_temp,conditional_day_2_temp,conditional_day_3_temp,conditional_day_4_temp,conditional_day_5_temp,conditional_day_6_temp,conditional_day_7_temp,conditional_day_8_temp,conditional_day_9_temp,conditional_finale_live_temp,conditional_finale_die_temp,
+  day_0_cough,conditional_day_1_cough,conditional_day_2_cough,conditional_day_3_cough,conditional_day_4_cough,conditional_day_5_cough,conditional_day_6_cough,conditional_day_7_cough,conditional_day_8_cough,conditional_day_9_cough,conditional_finale_live_cough,conditional_finale_die_cough,
+  day_0_smell,conditional_day_1_smell,conditional_day_2_smell,conditional_day_3_smell,conditional_day_4_smell,conditional_day_5_smell,conditional_day_6_smell,conditional_day_7_smell,conditional_day_8_smell,conditional_day_9_smell,conditional_finale_live_smell,conditional_finale_die_smell,
+  day_0,conditional_day_1,conditional_day_2,conditional_day_3,conditional_day_4,conditional_day_5,conditional_day_6,conditional_day_7,conditional_day_8,conditional_day_9,conditional_finale_live,conditional_finale_die
+];
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  //var timeline = distancing_array_shuffled;
+  var timeline_pre = seat_placement.concat(distancing_array_shuffled);
+  //var timeline = distancing_array_shuffled.concat(symptoms_timeline);
+  var timeline = timeline_pre.concat(symptoms_timeline);
+  //timeline.push(symptoms_timline);
+
+  jsPsych.init({
+    //timeline: [trial_1, trial_2, trial_3, trial_4, trial_5],
+    //timeline: timeline,
+    timeline: [seat_1a],
+    //distancing_array_shuffled,
+      //trial_9,trial_10,trial_11,trial_12,
+      //trial_7,trial_8,
+      //trial_1,trial_2,trial_3,trial_4,trial_5,trial_6,
+      //intro_0,intro_1,intro_2,intro_3,
+      //day_0_temp,conditional_day_1_temp,conditional_day_2_temp,conditional_day_3_temp,conditional_day_4_temp,conditional_day_5_temp,conditional_day_6_temp,conditional_day_7_temp,conditional_day_8_temp,conditional_day_9_temp,conditional_finale_live_temp,conditional_finale_die_temp,
+      //day_0_cough,conditional_day_1_cough,conditional_day_2_cough,conditional_day_3_cough,conditional_day_4_cough,conditional_day_5_cough,conditional_day_6_cough,conditional_day_7_cough,conditional_day_8_cough,conditional_day_9_cough,conditional_finale_live_cough,conditional_finale_die_cough,
+      //day_0_smell,conditional_day_1_smell,conditional_day_2_smell,conditional_day_3_smell,conditional_day_4_smell,conditional_day_5_smell,conditional_day_6_smell,conditional_day_7_smell,conditional_day_8_smell,conditional_day_9_smell,conditional_finale_live_smell,conditional_finale_die_smell,
+      //day_0,conditional_day_1,conditional_day_2,conditional_day_3,conditional_day_4,conditional_day_5,conditional_day_6,conditional_day_7,conditional_day_8,conditional_day_9,conditional_finale_live,conditional_finale_die
+    //],
+    //preload_images: ['images/person_red_flip.jpg','images/person_blue.jpg','https://cdn.jsdelivr.net/gh/naixiy/cov_exps/images/grass_3.jpg'],
+    preload_images: ['images/person_red_flip_mask.png','images/person_red_flip.png','images/person_blue2.png','images/person_red_flip_mask_coffee.png','images/person_blue2_mask.png',
+    'images/person_light_blue.png','images/person_light_blue_mask.png','images/person_light_blue_mask_coffee.png',
+    'images/carpet.jpg','images/grass_4.jpg','images/cafe_floor.jpg',
+    'images/symptoms_normal.jpg','images/symptoms_severe.jpg',
+    'images/symptoms_0.jpg','images/symptoms_1.jpg', 'images/symptoms_2.jpg', 'images/symptoms_3.jpg', 'images/symptoms_4.jpg', 'images/symptoms_5.jpg', 'images/symptoms_6.jpg', 'images/symptoms_7.jpg', 'images/symptoms_8.jpg', 'images/symptoms_9.jpg',
+    'images/coughing_0.jpg','images/coughing_1.jpg', 'images/coughing_2.jpg', 'images/coughing_3.jpg', 'images/coughing_4.jpg', 'images/coughing_5.jpg', 'images/coughing_6.jpg', 'images/coughing_7.jpg', 'images/coughing_8.jpg', 'images/coughing_9.jpg',
+    'images/smell_0.jpg','images/smell_1.jpg', 'images/smell_2.jpg', 'images/smell_3.jpg', 'images/smell_4.jpg', 'images/smell_5.jpg', 'images/smell_6.jpg', 'images/smell_7.jpg', 'images/smell_8.jpg', 'images/smell_9.jpg',
+    'images/symptoms_0.jpg','images/symptoms_1.jpg', 'images/symptoms_2.jpg', 'images/symptoms_3.jpg', 'images/symptoms_4.jpg', 'images/symptoms_5.jpg', 'images/symptoms_6.jpg', 'images/symptoms_7.jpg', 'images/symptoms_8.jpg', 'images/symptoms_9.jpg'
+  ],
+    on_finish: function(){jsPsych.data.displayData();}
+  });
+
+
+  </script>
+</html>
