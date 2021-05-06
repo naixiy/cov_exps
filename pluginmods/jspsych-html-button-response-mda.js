@@ -72,6 +72,10 @@ jsPsych.plugins["html-button-response-mda"] = (function() {
         default: true,
         description: 'If true, then trial will end when user responds.'
       },
+      trial_id: {
+        type: jsPsych.plugins.parameterType.STRING,
+        default: "trial_id_unspecified"
+      },
     }
   }
 
@@ -175,7 +179,8 @@ jsPsych.plugins["html-button-response-mda"] = (function() {
       var trial_data = {
         "rt": response.rt,
         "stimulus": trial.stimulus,
-        "button_pressed": response.button
+        "button_pressed": response.button,
+        "trial_id": trial.trial_id,
       };
 
       // Display selection for a second

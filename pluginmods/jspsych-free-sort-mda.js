@@ -130,7 +130,11 @@ jsPsych.plugins['free-sort-mda'] = (function() {
         default: false,
         description: 'If false, the images will be positioned to the left and right of the sort area when the trial loads. '+
         'If true, the images will be positioned at random locations inside the sort area when the trial loads.'
-      }
+      },
+      trial_id: {
+        type: jsPsych.plugins.parameterType.STRING,
+        default: "trial_id_unspecified"
+      },
     }
   }
 
@@ -400,7 +404,8 @@ jsPsych.plugins['free-sort-mda'] = (function() {
           "init_locations": JSON.stringify(init_locations),
           "moves": JSON.stringify(moves),
           "final_locations": JSON.stringify(final_locations),
-          "rt": rt
+          "rt": rt,
+          "trial_id": trial.trial_id,
         };
 
         // advance to next part
